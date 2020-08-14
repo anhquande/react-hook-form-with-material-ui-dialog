@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import { useForm } from "react-hook-form";
 import ReactDOM from "react-dom";
 import { createMuiTheme, ThemeProvider, Button } from "@material-ui/core";
@@ -15,6 +15,9 @@ function App() {
   });
   const [open, setOpen] = React.useState(false);
   const onClose = () => setOpen(false);
+  const onClick = useCallback(()=>{
+    setOpen(true);
+  }, []);
 
   renderCount++;
 
@@ -27,7 +30,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       Render Count: {renderCount}
-      <Button onClick={() => setOpen(true)}>Open dialog</Button>
+      <Button onClick={onClick}>Open dialog</Button>
       <MyDialog open={open} onClose={onClose} form={form} />
     </ThemeProvider>
   );
